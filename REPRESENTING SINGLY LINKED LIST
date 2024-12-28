@@ -1,0 +1,33 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+struct node{
+  int data;
+  //pointer to struct node
+  node* next;
+};
+int main() {
+    
+    node* head=new node;
+    head->data=10;
+    head->next=nullptr;
+    
+    node* curr1=new node;
+    curr1->data=20;
+    curr1->next=nullptr;
+    //initialized to head->next=20
+    head->next=curr1;
+    
+    node* curr2=new node;
+    curr2->data=30;
+    curr1->next=nullptr;
+    //initialized to head->next=30
+    curr1->next=curr2;
+    
+    node* temp=head;
+    //traversing all the elemets by using temp pointer
+    while(temp!=nullptr){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+}
