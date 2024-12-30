@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+void count_of_ll(struct node* head) {
+    int cnt = 0;
+    if (head == nullptr) {
+        cout << "Linked list is empty" << endl;
+        return;
+    }
+    struct node* ptr = head;
+    while (ptr != nullptr) {
+        cnt++;
+        ptr = ptr->next;
+    }
+    cout << "Number of nodes in the linked list: " << cnt << endl;
+}
+
+int main() {
+    // Creating the first node
+    struct node* head = new node;
+    head->data = 10;
+    head->next = nullptr;
+
+    // Creating the second node
+    struct node* head1 = new node;
+    head1->data = 20;
+    head1->next = nullptr;
+
+    // Linking the first node to the second
+    head->next = head1;
+
+    // Creating the third node
+    struct node* head2 = new node;
+    head2->data = 30;
+    head2->next = nullptr;
+
+    // Linking the second node to the third
+    head1->next = head2;
+
+    // Counting the number of nodes
+    count_of_ll(head);
+
+    return 0;
+}
