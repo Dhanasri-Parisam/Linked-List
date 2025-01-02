@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+struct node {
+    int data;
+    struct node* next;
+};
+
+// Function to print the linked list
+void print_data(struct node* head) {
+    if (head == nullptr) {
+        cout << "Linked list is empty" << endl;
+        return;
+    }
+    struct node* ptr = head;
+    while (ptr != nullptr) {
+        cout << ptr->data << " -> ";
+        ptr = ptr->next;
+    }
+    cout << "NULL" << endl;
+}
+
+// Function to insert a node at the beginning
+void insertAtBeginning(node*& head, int value) {
+    node* newNode = new node(); // Create a new node
+    newNode->data = value;     // Set the data
+    newNode->next = head;      // Point to the current head
+    head = newNode;            // Update head to the new node
+}
+// Function to insert a node at the ending
+void insertAtEnd(node*& head,int val){
+    node* nn=new node();
+    nn->data = val;     // Set the data
+    nn->next = nullptr; 
+    if (head == nullptr) {
+        head = nn;
+        return;
+    }
+    node* temp=head;
+    while(temp->next!=nullptr){
+        temp=temp->next;
+    }
+    temp->next=nn;
+}
+int main() {
+    // Creating the initial linked list
+    node* head = nullptr; // Initialize an empty linked list
+
+    // Insert nodes at the beginning
+    insertAtBeginning(head, 10);
+    insertAtBeginning(head, 20);
+    insertAtBeginning(head, 30);
+
+
+    // Print the initial linked list
+    print_data(head);
+
+    // Insert a new node at the beginning
+    insertAtBeginning(head, 40);
+
+    // Print the updated linked list
+    print_data(head);
+    cout<<"insertion at end : ";
+    insertAtEnd(head,5);
+    print_data(head);
+
+    return 0;
+}
