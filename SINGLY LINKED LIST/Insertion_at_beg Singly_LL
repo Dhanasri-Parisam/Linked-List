@@ -1,41 +1,51 @@
 #include <iostream>
 using namespace std;
 
-// Node structure
-struct Node {
+struct node {
     int data;
-    Node* next;
-
-    Node(int value) : data(value), next(nullptr) {}
+    struct node* next;
 };
 
-// Insert a node at the beginning of the linked list
-void insertAtBeginning(Node*& head, int value) {
-    Node* newNode = new Node(value);
-    newNode->next = head;
-    head = newNode;
-}
-
-// Display the linked list
-void display(Node* head) {
-    Node* temp = head;
-    while (temp != nullptr) {
-        cout << temp->data << " -> ";
-        temp = temp->next;
+// Function to print the linked list
+void print_data(struct node* head) {
+    if (head == nullptr) {
+        cout << "Linked list is empty" << endl;
+        return;
+    }
+    struct node* ptr = head;
+    while (ptr != nullptr) {
+        cout << ptr->data << " -> ";
+        ptr = ptr->next;
     }
     cout << "NULL" << endl;
 }
 
+// Function to insert a node at the beginning
+void insertAtBeginning(node*& head, int value) {
+    node* newNode = new node(); // Create a new node
+    newNode->data = value;     // Set the data
+    newNode->next = head;      // Point to the current head
+    head = newNode;            // Update head to the new node
+}
+
 int main() {
-    Node* head = nullptr; // Initialize an empty linked list
+    // Creating the initial linked list
+    node* head = nullptr; // Initialize an empty linked list
 
     // Insert nodes at the beginning
     insertAtBeginning(head, 10);
     insertAtBeginning(head, 20);
     insertAtBeginning(head, 30);
 
-    // Display the linked list
-    display(head);
+
+    // Print the initial linked list
+    print_data(head);
+
+    // Insert a new node at the beginning
+    insertAtBeginning(head, 5);
+
+    // Print the updated linked list
+    print_data(head);
 
     return 0;
 }
