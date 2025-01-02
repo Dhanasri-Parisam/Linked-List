@@ -1,0 +1,65 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+struct node {
+    int data;
+    node* next = nullptr;
+};
+
+// Function to display the linked list and return its values
+vector<int> display(node* head) {
+    vector<int> values;
+    node* temp = head;
+    while (temp != nullptr) {
+        values.push_back(temp->data);
+        temp = temp->next;
+    }
+    for (int val : values) cout << val << " ";
+    cout << endl;
+    return values;
+}
+
+// Function to insert a node at the beginning
+void insert_beg(node*& head, int val) {
+    node* newnode = new node({val, head});
+    head = newnode;
+}
+
+// Function to insert a node at the end
+void insert_end(node*& head, int val) {
+    node* newnode = new node({val, nullptr});
+    if (head == nullptr) { // If the list is empty
+        head = newnode;
+        return;
+    }
+    node* temp = head;
+    while (temp->next != nullptr) { // Traverse to the last node
+        temp = temp->next;
+    }
+    temp->next = newnode; // Link the new node
+}
+
+int main() {
+    node* head = nullptr;
+
+    // Insert elements at the beginning
+    for (int i : {20, 30, 40}) {
+        insert_beg(head, i);
+    }
+
+    cout << "Original list: ";
+    display(head); // Display the linked list
+
+    // Insert a new element at the beginning
+    insert_beg(head, 10);
+    cout << "After insert_beg: ";
+    display(head); // Display the updated linked list
+
+    // Insert a new element at the end
+    insert_end(head, 50);
+    cout << "After insert_end: ";
+    display(head); // Display the updated linked list
+
+    return 0;
+}
