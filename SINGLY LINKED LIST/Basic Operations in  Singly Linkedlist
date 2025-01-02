@@ -1,0 +1,174 @@
+#include <iostream>
+#include <vector>
+#include <climits>
+using namespace std;
+
+struct node {
+    int data;
+    node* next = nullptr;
+};
+
+void display(node* head) {
+    node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " -> ";
+        temp = temp->next;
+    }
+    cout << "NULL" << endl;
+}
+
+void insert_beg(node*& head, int val) { // Pass head by reference
+    node* temp = new node({val, nullptr});
+    temp->next = head;
+    head = temp;
+}
+
+void insert_end(node*& head, int val) {
+    node* nn = new node({val, nullptr});
+    if (head == nullptr) { // Handle the case when the list is empty
+        head = nn;
+        return;
+    }
+    node* temp = head;
+    while (temp->next != nullptr) {
+        temp = temp->next;
+    }
+    temp->next = nn;
+}
+
+int count_nodes(node* head) {
+    node* ptr = head;
+    int cnt = 0;
+    while (ptr != nullptr) {
+        cnt++;
+        ptr = ptr->next;
+    }
+    return cnt;
+}
+
+bool search_operation(node* head, int key) {
+    node* temp = head;
+    while (temp != nullptr) {
+        if (temp->data == key) {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+
+vector<int> display_even(node* head) { // Corrected structure reference
+    node* temp = head;
+    vector<int> ans;
+    while (temp != nullptr) {
+        if (temp->data % 2 == 0) {
+            ans.push_back(temp->data);
+        }
+        temp = temp->next;
+    }
+    return ans;
+}
+
+vector<int> display_odd(node* head){
+    node* ptr = head;
+    vector<int> ans;
+    while(ptr != nullptr){
+        if(ptr->data % 2 != 0){
+            ans.push_back(ptr->data);
+        }
+        ptr=ptr->next;
+    }
+    return ans;
+}
+
+int sum_of_list(node* head){
+    node* ptr=head;
+    int sum=0;
+    while(ptr!=nullptr){
+        sum+=ptr->data;
+        ptr=ptr->next;
+    }
+    return sum;
+}
+
+int mini(node* head){
+    node* temp=head;
+    int min=INT_MAX;
+    while(temp!=nullptr){
+        if(temp->data<min){
+            min=temp->data;
+        }
+        temp=temp->next;
+    }
+    return min;
+}
+
+int maxi(node* head){
+    node* temp=head;
+    int max=INT_MIN;
+    while(temp!=nullptr){
+        if(temp->data>max){
+            max=temp->data;
+        }
+        temp=temp->next;
+    }
+    return max;
+}
+
+int main() {
+    node* head = nullptr;
+
+    // Create the initial list
+    for (int i : {4, 3, 2}) {
+        insert_beg(head, i);
+    }
+    cout << "Original list:" << endl;
+    display(head);
+
+    // Insert at the beginning
+    insert_beg(head, 1);
+    cout << "After insert at beginning: " << endl;
+    display(head);
+
+    // Insert at the end
+    insert_end(head, 5);
+    cout << "After insert at end: " << endl;
+    display(head);
+
+    // Count nodes
+    cout << "Number of nodes in the list: " << count_nodes(head) << endl;
+
+    // Search for an element
+    int key = 70;
+    if (search_operation(head, key)) {
+        cout << "Found element in LL: " << key << endl;
+    } else {
+        cout << "Not found element in LL: " << key << endl;
+    }
+
+    // Display even nodes
+    vector<int> even_nodes = display_even(head);
+    cout << "Even nodes in the list: ";
+    int sum=0;
+    for (int num : even_nodes) {
+        cout << num << " ";
+        sum+=num; 
+    }
+    cout<<"\n";
+    cout <<"sum of all evens : " << sum << "\n";
+
+    vector<int> odd_nodes = display_odd(head);
+    cout<<"Odd nodes in the list: ";
+    int res=0;
+    for(int odd:odd_nodes){
+        cout << odd << " ";
+        res+=odd;
+    }
+    cout << "\n";
+    cout << "sum of all odd numbers: " << res << endl;
+    
+    cout << "sum of the all node: " <<sum_of_list(head) << "\n";
+    
+    cout << "minimum element from the list : " << mini(head) << "\n";
+    cout << "miximum element from the list : " << maxi(head);
+}
