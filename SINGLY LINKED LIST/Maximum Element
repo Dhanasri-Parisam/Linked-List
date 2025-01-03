@@ -1,0 +1,23 @@
+int maxi(node* head) {
+    node* temp = head;
+    int max = INT_MIN;
+    while (temp != nullptr) {
+        if (temp->data > max) {
+            max = temp->data;
+        }
+        temp = temp->next;
+    }
+    return max;
+}
+
+int main() {
+    node* head = nullptr;
+
+    insert_end(head, 1);
+    insert_end(head, 2);
+    insert_end(head, 3);
+
+    cout << "Maximum element in the list: " << maxi(head) << endl;
+
+    return 0;
+}
