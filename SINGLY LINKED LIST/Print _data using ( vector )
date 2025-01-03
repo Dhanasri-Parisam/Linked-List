@@ -3,7 +3,7 @@
 using namespace std;
 
 struct node {
-    int data;
+    int data=10;  //it is a default whenever a new node is created without data then it will be accessed 
     node* next = nullptr;
 };
 
