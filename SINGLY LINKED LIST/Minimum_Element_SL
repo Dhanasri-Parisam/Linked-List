@@ -1,0 +1,23 @@
+int mini(node* head) {
+    node* temp = head;
+    int min = INT_MAX;
+    while (temp != nullptr) {
+        if (temp->data < min) {
+            min = temp->data;
+        }
+        temp = temp->next;
+    }
+    return min;
+}
+
+int main() {
+    node* head = nullptr;
+
+    insert_end(head, 3);
+    insert_end(head, 1);
+    insert_end(head, 2);
+
+    cout << "Minimum element in the list: " << mini(head) << endl;
+
+    return 0;
+}
