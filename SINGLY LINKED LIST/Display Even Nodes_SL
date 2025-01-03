@@ -1,0 +1,29 @@
+vector<int> display_even(node* head) {
+    node* temp = head;
+    vector<int> ans;
+    while (temp != nullptr) {
+        if (temp->data % 2 == 0) {
+            ans.push_back(temp->data);
+        }
+        temp = temp->next;
+    }
+    return ans;
+}
+
+int main() {
+    node* head = nullptr;
+
+    insert_end(head, 1);
+    insert_end(head, 2);
+    insert_end(head, 3);
+    insert_end(head, 4);
+
+    vector<int> evens = display_even(head);
+    cout << "Even nodes: ";
+    for (int num : evens) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
