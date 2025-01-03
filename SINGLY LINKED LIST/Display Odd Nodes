@@ -1,0 +1,29 @@
+vector<int> display_odd(node* head) {
+    node* ptr = head;
+    vector<int> ans;
+    while (ptr != nullptr) {
+        if (ptr->data % 2 != 0) {
+            ans.push_back(ptr->data);
+        }
+        ptr = ptr->next;
+    }
+    return ans;
+}
+
+int main() {
+    node* head = nullptr;
+
+    insert_end(head, 1);
+    insert_end(head, 2);
+    insert_end(head, 3);
+    insert_end(head, 4);
+
+    vector<int> odds = display_odd(head);
+    cout << "Odd nodes: ";
+    for (int num : odds) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
