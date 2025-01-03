@@ -1,11 +1,12 @@
-int count_nodes(node* head) {
-    node* ptr = head;
-    int cnt = 0;
-    while (ptr != nullptr) {
-        cnt++;
-        ptr = ptr->next;
+bool search_operation(node* head, int key) {
+    node* temp = head;
+    while (temp != nullptr) {
+        if (temp->data == key) {
+            return true;
+        }
+        temp = temp->next;
     }
-    return cnt;
+    return false;
 }
 
 int main() {
@@ -15,7 +16,12 @@ int main() {
     insert_end(head, 2);
     insert_end(head, 3);
 
-    cout << "Number of nodes in the list: " << count_nodes(head) << endl;
+    int key = 2;
+    if (search_operation(head, key)) {
+        cout << "Element " << key << " found in the list." << endl;
+    } else {
+        cout << "Element " << key << " not found in the list." << endl;
+    }
 
     return 0;
 }
