@@ -1,0 +1,21 @@
+int count_nodes(node* head) {
+    node* ptr = head;
+    int cnt = 0;
+    while (ptr != nullptr) {
+        cnt++;
+        ptr = ptr->next;
+    }
+    return cnt;
+}
+
+int main() {
+    node* head = nullptr;
+
+    insert_end(head, 1);
+    insert_end(head, 2);
+    insert_end(head, 3);
+
+    cout << "Number of nodes in the list: " << count_nodes(head) << endl;
+
+    return 0;
+}
