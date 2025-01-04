@@ -1,0 +1,102 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+struct node{
+    int data;
+    node* next=nullptr;
+};
+
+void display(node* head){
+    node* temp = head;
+    while(temp!=nullptr){
+        cout << temp -> data << " -> ";
+        temp = temp -> next;
+    }
+    cout<<" NULL "<<"\n";
+}
+
+void insertAtBeginning(node*& head, int value) {
+    node* newNode = new node(); // Create a new node
+    newNode->data = value;     // Set the data
+    newNode->next = head;      // Point to the current head
+    head = newNode;            // Update head to the new node
+}
+
+void count_of_ll(struct node* head) {
+    int cnt = 0;
+    if (head == nullptr) {
+        cout << "Linked list is empty" << endl;
+        return;
+    }
+    struct node* ptr = head;
+    while (ptr != nullptr) {
+        cnt++;
+        ptr = ptr->next;
+    }
+    cout << "Number of nodes in the linked list: " << cnt << endl;
+}
+
+void delete_beg(node*& head) { // Use reference to modify the original head pointer
+    if (head == nullptr) {
+        cout << "Linked list is empty" << endl;
+        return;
+    }
+    
+    node* temp = head; // Store the current head
+    head = head->next; // Move head to the next node
+    delete temp;       // Delete the old head node
+    temp = nullptr;    // Avoid dangling pointers
+    
+    cout << "Node deleted from the beginning" << "\n";
+} 
+
+void delete_end(node* head){
+    if(head==NULL){
+        cout<<"list is empty !";
+    }
+    node* temp=head;
+    node* temp2=head;
+    while(temp->next!=nullptr){
+        temp2=temp;
+        temp=temp->next;
+    }
+    temp2->next=nullptr;
+    free(temp);
+    temp=NULL;
+}
+
+int main() {
+    node* head = new node({10,nullptr});
+    node* nn1 = new node({20,nullptr});
+    head -> next = nn1;
+    
+    node* nn2 = new node({30,nullptr});
+    nn1 -> next = nn2;
+    
+    node* nn3 = new node({40,nullptr});
+    nn2 -> next = nn3;
+    
+    display(head);
+    delete_beg(head);
+    display(head);
+    
+    delete_end(head);
+    display(head);
+    
+    count_of_ll(head);
+    
+    delete_beg(head);
+    display(head);
+    
+    count_of_ll(head);
+    
+    delete_beg(head);
+    display(head);
+    
+    count_of_ll(head);
+    
+    insertAtBeginning(head, 5);
+    display(head);
+    count_of_ll(head);
+    
+}
