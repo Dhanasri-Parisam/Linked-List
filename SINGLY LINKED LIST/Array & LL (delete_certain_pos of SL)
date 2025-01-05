@@ -45,50 +45,42 @@ int main() {
 
 Deletion at a Certain Position SLL:
 /*=============================================================================*/
-#include <iostream>
+void delete_pos(node*& head, int val) {
+    if (head == nullptr) {
+        cout << "LL is empty!" << endl;
+        return;
+    }
 
-struct Node {
-    int data;
-    Node* next;
-};
+    if (val <= 0) {
+        cout << "Invalid position!" << endl;
+        return;
+    }
 
-void deleteAtPosition(Node*& head, int position) {
-    if (head == nullptr || position < 0) return;
-
-    if (position == 0) {
-        Node* temp = head;
+    if (val == 1) {
+        node* temp = head;
         head = head->next;
         delete temp;
         return;
     }
 
-    Node* current = head;
-    for (int i = 0; current != nullptr && i < position - 1; ++i) {
-        current = current->next;
+    node* prev = nullptr;
+    node* curr = head;
+    
+    // Traverse to the node just before the position to delete
+    for (int i = 1; i < val && curr != nullptr; ++i) {
+        prev = curr;
+        curr = curr->next;
     }
 
-    if (current == nullptr || current->next == nullptr) return;
-
-    Node* temp = current->next;
-    current->next = current->next->next;
-    delete temp;
-}
-
-void printList(Node* head) {
-    Node* current = head;
-    while (current != nullptr) {
-        std::cout << current->data << " ";
-        current = current->next;
+    if (curr == nullptr) {
+        cout << "Position out of bounds!" << endl;
+        return;
     }
-    std::cout << std::endl;
+
+    prev->next = curr->next;
+    delete curr;
 }
 
-int main() {
-    Node* head = new Node{10, nullptr};
-    head->next = new Node{20, nullptr};
-    head->next->next = new Node{30, nullptr};
-
-    deleteAtPosition(head, 1);
 
     printList(head);  // Output: 10 30
 
