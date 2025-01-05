@@ -1,0 +1,81 @@
+
+Deletion at the End of ARRAY:
+/*===============================================================================*/
+
+#include <iostream>
+#include <vector>
+
+void deleteAtEnd(std::vector<int>& arr) {
+    if (!arr.empty()) {
+        arr.pop_back();
+    }
+}
+
+void printArray(const std::vector<int>& arr) {
+    for (int val : arr) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    std::vector<int> arr = {10, 20, 30};
+
+    deleteAtEnd(arr);
+
+    printArray(arr);  // Output: 10 20
+
+    return 0;
+}
+
+
+
+Deletion at the End SLL:
+/*===============================================================================*/
+
+
+#include <iostream>
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void deleteAtEnd(Node*& head) {
+    if (head == nullptr) return;
+
+    if (head->next == nullptr) {
+        delete head;
+        head = nullptr;
+        return;
+    }
+
+    Node* current = head;
+    while (current->next->next != nullptr) {
+        current = current->next;
+    }
+
+    delete current->next;
+    current->next = nullptr;
+}
+
+void printList(Node* head) {
+    Node* current = head;
+    while (current != nullptr) {
+        std::cout << current->data << " ";
+        current = current->next;
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    Node* head = new Node{10, nullptr};
+    head->next = new Node{20, nullptr};
+    head->next->next = new Node{30, nullptr};
+
+    deleteAtEnd(head);
+
+    printList(head);  // Output: 10 20
+
+    return 0;
+}
