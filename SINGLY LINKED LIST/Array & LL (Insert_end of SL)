@@ -1,0 +1,76 @@
+Inserting at the End in an Array (C++) :
+--------------------------------------------------------------------------------
+
+#include <iostream>
+#include <vector>
+
+void insertAtEnd(std::vector<int>& arr, int value) {
+    arr.push_back(value);
+}
+
+void printArray(const std::vector<int>& arr) {
+    for (int val : arr) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    std::vector<int> arr;
+
+    insertAtEnd(arr, 10);
+    insertAtEnd(arr, 20);
+    insertAtEnd(arr, 30);
+
+    printArray(arr);  // Output: 10 20 30
+
+    return 0;
+}
+
+
+Inserting at the End in a Singly Linked List (C++):
+-------------------------------------------------------------------------
+
+#include <iostream>
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void insertAtEnd(Node*& head, int value) {
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->next = nullptr;
+
+    if (head == nullptr) {
+        head = newNode;
+    } else {
+        Node* temp = head;
+        while (temp->next != nullptr) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+void printList(Node* head) {
+    Node* current = head;
+    while (current != nullptr) {
+        std::cout << current->data << " ";
+        current = current->next;
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    Node* head = nullptr;
+
+    insertAtEnd(head, 10);
+    insertAtEnd(head, 20);
+    insertAtEnd(head, 30);
+
+    printList(head);  // Output: 10 20 30
+
+    return 0;
+}
