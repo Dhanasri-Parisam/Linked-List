@@ -45,44 +45,32 @@ int main() {
 
 Deletion at a Certain Position SLL:
 /*=============================================================================*/
-void delete_pos(node*& head, int val) {
-    if (head == nullptr) {
-        cout << "LL is empty!" << endl;
-        return;
+void deleteKth(node* head,int k){
+    //edge case
+    if(head==nullptr){
+       cout<<"empty list";
     }
-
-    if (val <= 0) {
-        cout << "Invalid position!" << endl;
-        return;
+    else if(k==1){
+        node* temp=head;
+        while(temp->next!=nullptr){
+            free(head);
+            head=nullptr;
+            temp=temp->next;
+        }
     }
-
-    if (val == 1) {
-        node* temp = head;
-        head = head->next;
-        delete temp;
-        return;
+    else{
+        int cnt=0;
+        node* ptr=head;
+        node* prev=nullptr;
+        while(ptr->next!=nullptr){
+            cnt++;
+            if(cnt==k){
+                ptr->next=ptr->next->next;
+                free(ptr);
+                break;
+            }
+            prev=ptr; //the game starts here
+            ptr=ptr->next;
+        }
     }
-
-    node* prev = nullptr;
-    node* curr = head;
-    
-    // Traverse to the node just before the position to delete
-    for (int i = 1; i < val && curr != nullptr; ++i) {
-        prev = curr;
-        curr = curr->next;
-    }
-
-    if (curr == nullptr) {
-        cout << "Position out of bounds!" << endl;
-        return;
-    }
-
-    prev->next = curr->next;
-    delete curr;
-}
-
-
-    printList(head);  // Output: 10 30
-
-    return 0;
 }
