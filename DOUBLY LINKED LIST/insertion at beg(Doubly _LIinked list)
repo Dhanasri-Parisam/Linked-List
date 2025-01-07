@@ -1,0 +1,76 @@
+#include <iostream>
+
+using namespace std;
+
+// Node structure for a doubly linked list
+struct Node {
+    int data;
+    Node* prev;
+    Node* next;
+
+    Node(int val) : data(val), prev(nullptr), next(nullptr) {}
+};
+
+// Function to insert a new node at the beginning of the list
+void insertAtBeginning(Node*& head, int newData) {
+    // 1. Create a new node
+    Node* newNode = new Node(newData);
+
+    // 2. If the list is empty (head is nullptr)
+    if (head == nullptr) {
+        head = newNode; // New node becomes the head
+        return;
+    }
+
+    // 3. If the list is not empty
+    newNode->next = head; // New node's next points to the current head
+    head->prev = newNode; // Current head's previous points to the new node
+    head = newNode;      // New node becomes the new head
+}
+
+// Function to print the doubly linked list (forward)
+void printList(Node* head) {
+    if (head == nullptr) {
+        cout << "List is empty." << endl;
+        return;
+    }
+
+    cout << "List: ";
+    Node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+// Function to delete the entire linked list (to prevent memory leaks)
+void deleteList(Node*& head) {
+    Node* current = head;
+    Node* next;
+    while (current != nullptr) {
+        next = current->next;
+        delete current;
+        current = next;
+    }
+    head = nullptr; // Important: set head to null after deleting all nodes
+}
+
+int main() {
+    Node* head = nullptr; // Initialize an empty list
+
+    insertAtBeginning(head, 10);
+    printList(head); // Output: List: 10
+
+    insertAtBeginning(head, 20);
+    printList(head); // Output: List: 20 10
+
+    insertAtBeginning(head, 30);
+    printList(head); // Output: List: 30 20 10
+
+    insertAtBeginning(head, 5);
+    printList(head); // Output: List: 5 30 20 10
+
+    deleteList(head); // Clean up memory
+    return 0;
+}
